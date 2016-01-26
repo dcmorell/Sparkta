@@ -28,7 +28,7 @@
     </parent>
 
     <groupId>com.stratio.sparkta</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>parent_2.10</artifactId>
     <version>0.9.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -163,7 +163,9 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
         <scala.binary.version>2.10</scala.binary.version>
-        <scala.version>2.10.4</scala.version>
+        <scala.version>2.10.6</scala.version>
+        <scala_2.10.version>2.10.6</scala_2.10.version>
+        <scala_2.11.version>2.11.7</scala_2.11.version>
         <slf4j.version>1.7.7</slf4j.version>
         <nscala.time.version>2.0.0</nscala.time.version>
         <scalatest.version>2.2.2</scalatest.version>
@@ -192,27 +194,27 @@
             </dependency>
             <dependency>
                 <groupId>com.stratio.sparkta</groupId>
-                <artifactId>aggregator</artifactId>
+                <artifactId>aggregator_${scala.binary.version}</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.stratio.sparkta</groupId>
-                <artifactId>serving-api</artifactId>
+                <artifactId>serving-api_${scala.binary.version}</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.stratio.sparkta</groupId>
-                <artifactId>serving-core</artifactId>
+                <artifactId>serving-core_${scala.binary.version}</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.stratio.sparkta</groupId>
-                <artifactId>driver</artifactId>
+                <artifactId>driver_${scala.binary.version}</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.stratio.sparkta</groupId>
-                <artifactId>sdk</artifactId>
+                <artifactId>sdk_${scala.binary.version}</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -440,8 +442,9 @@
         </dependency>
     </dependencies>
     <build>
-        <sourceDirectory>src/main/scala</sourceDirectory>
-        <testSourceDirectory>src/test/scala</testSourceDirectory>
+        <directory>${project.basedir}/target/${scala.binary.version}</directory>
+        <outputDirectory>${project.build.directory}/classes</outputDirectory>
+        <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -552,6 +555,20 @@
                 <spark.version>1.5.2</spark.version>
                 <mongodb.spark.version>0.10.1</mongodb.spark.version>
                 <elastic.spark.version>2.2.0-beta1</elastic.spark.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>scala-2.10</id>
+            <properties>
+                <scala.binary.version>2.10</scala.binary.version>
+                <scala.version>${scala_2.10.version}</scala.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>scala-2.11</id>
+            <properties>
+                <scala.binary.version>2.11</scala.binary.version>
+                <scala.version>${scala_2.11.version}</scala.version>
             </properties>
         </profile>
     </profiles>
